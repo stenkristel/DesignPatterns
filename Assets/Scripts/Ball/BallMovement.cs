@@ -1,4 +1,4 @@
-using System;
+using Border;
 using UnityEngine;
 
 namespace Ball
@@ -15,15 +15,18 @@ namespace Ball
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.CompareTag("Vertical"))
+            if (!collision.gameObject.TryGetComponent<IBorderObject>(out IBorderObject borderObject))
             {
-                speed.x = -speed.x;
+                return;
             }
-            
-            if (collision.gameObject.CompareTag("Horizontal"))
+
+            if (borderObject.IsGoal)
             {
-                speed.y = -speed.y;
+                //goal
+                return;
             }
+
+            speed *= borderObject.OnHitDirectionModifier;
         }
     }
 }

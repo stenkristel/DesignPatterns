@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4438856179862202951}
   - component: {fileID: 3778777586498261030}
   - component: {fileID: 3444699532087112858}
+  - component: {fileID: 7360623386586775484}
   m_Layer: 0
   m_Name: Player
   m_TagString: Vertical
@@ -207,3 +208,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.99999994, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &7360623386586775484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7023466631409919439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44d784b422dd4314195912f4557a99c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
