@@ -1,60 +1,47 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class InputHandler : MonoBehaviour
+namespace Input
 {
-    [Serializable]
-    public struct KeyBinding
+    public class InputHandler
     {
-        public KeyCode keyCode;
-        public BaseCommand command;
-        public UnityEvent onPressed;
-        public UnityEvent onDown;
-        public UnityEvent onUp;
-    }
+        public Dictionary<BaseCommand, KeyCode> keyBindings = new();
 
-    [SerializeField] private List<KeyBinding> bindings;
-
-    private void Update()
-    {
-        DetectInput();
-    }
-
-    private void DetectInput()
-    {
-        if (!Input.anyKey) return;
-        for (int i = 0; i < bindings.Count; i++)
+        /*public InputHandler(Dictionary<BaseCommand, KeyCode> keyBindings)
         {
-            var keyBinding = bindings.ElementAt(i);
-            if (Input.GetKey(keyBinding.keyCode))
+            this.keyBindings = keyBindings;
+        }*/
+
+        private void OnUpdate()
+        {
+            DetectInput();
+        }
+
+        private void DetectInput()
+        {
+            if (!UnityEngine.Input.anyKey) return;
+            for (int i = 0; i < keyBindings.Count; i++)
             {
-                keyBinding.command?.Execute();
-                keyBinding.onPressed?.Invoke();
-            }
-            if (Input.GetKeyDown(keyBinding.keyCode))
-            {
-                keyBinding.command?.ExecuteDown();
-                keyBinding.onDown?.Invoke();
-            }
-            if (Input.GetKeyUp(keyBinding.keyCode))
-            {
-                keyBinding.command?.ExecuteUp();
-                keyBinding.onUp?.Invoke();
+                var keyBinding = keyBindings.ElementAt(i);
+                if (UnityEngine.Input.GetKey(keyBinding.Value))
+                {
+                    keyBinding.Key?.Execute();
+                }
+                if (UnityEngine.Input.GetKeyDown(keyBinding.Value))
+                {
+                    keyBinding.Key?.ExecuteDown();
+                }
+                if (UnityEngine.Input.GetKeyUp(keyBinding.Value))
+                {
+                    keyBinding.Key?.ExecuteUp();
+                }
             }
         }
-    }
 
-    public void ChangeKeyBinding(BaseCommand command, KeyCode newKeyCode)
-    {
-        for (int i = bindings.Count - 1; i >= 0; i--)
+        public void ChangeKeyBinding(BaseCommand command, KeyCode newKeyCode)
         {
-            var binding = bindings[i];
-            if (binding.command == command) binding.keyCode = newKeyCode;
-            bindings.Add(binding);
-            bindings.Remove(bindings[i]);
+            keyBindings[command] =  newKeyCode;
         }
     }
 }
