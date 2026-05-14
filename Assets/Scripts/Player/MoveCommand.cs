@@ -1,4 +1,5 @@
 using System;
+using Input;
 using UnityEngine;
 
 namespace Player
@@ -7,16 +8,16 @@ namespace Player
     {
         private readonly float _direction;
 
-        public Action<float> OnMove;
+        public Action<float> onMove;
 
-        public MoveCommand(float direction)
+        public MoveCommand(float direction, KeyCode keyCode) : base(keyCode)
         {
             _direction = direction;
         }
 
         public override void Execute()
         {
-            OnMove?.Invoke(_direction);
+            onMove?.Invoke(_direction);
         }
     }
 }

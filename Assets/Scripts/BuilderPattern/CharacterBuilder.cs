@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Input;
 using Player;
 using UnityEngine;
@@ -7,7 +8,7 @@ namespace BuilderPattern
     public class CharacterBuilder
     {
         private Character _character;
-
+        
         public CharacterBuilder()
         {
             _character = new Character();
@@ -36,6 +37,7 @@ namespace BuilderPattern
             _character.Movement = movement;
             return this;
         }
+
 
         public Character Build()
         {

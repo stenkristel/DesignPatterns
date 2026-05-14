@@ -6,14 +6,9 @@ namespace Input
 {
     public class InputHandler
     {
-        public Dictionary<BaseCommand, KeyCode> keyBindings = new();
+        public Dictionary<KeyCode, BaseCommand> keyBindings = new();
 
-        /*public InputHandler(Dictionary<BaseCommand, KeyCode> keyBindings)
-        {
-            this.keyBindings = keyBindings;
-        }*/
-
-        private void OnUpdate()
+        public void OnUpdate()
         {
             DetectInput();
         }
@@ -24,24 +19,40 @@ namespace Input
             for (int i = 0; i < keyBindings.Count; i++)
             {
                 var keyBinding = keyBindings.ElementAt(i);
-                if (UnityEngine.Input.GetKey(keyBinding.Value))
+                if (UnityEngine.Input.GetKey(keyBinding.Key))
                 {
-                    keyBinding.Key?.Execute();
+                    keyBinding.Value?.Execute();
                 }
-                if (UnityEngine.Input.GetKeyDown(keyBinding.Value))
+
+                if (UnityEngine.Input.GetKeyDown(keyBinding.Key))
                 {
-                    keyBinding.Key?.ExecuteDown();
+                    keyBinding.Value?.ExecuteDown();
                 }
-                if (UnityEngine.Input.GetKeyUp(keyBinding.Value))
+
+                if (UnityEngine.Input.GetKeyUp(keyBinding.Key))
                 {
-                    keyBinding.Key?.ExecuteUp();
+                    keyBinding.Value?.ExecuteUp();
                 }
             }
         }
 
-        public void ChangeKeyBinding(BaseCommand command, KeyCode newKeyCode)
+        public void AddKeyBindings(params BaseCommand[] bindings)
         {
-            keyBindings[command] =  newKeyCode;
+            foreach (var command in bindings)
+            {
+                AddKeyBinding(command);
+            }
+        }
+
+        public void AddKeyBinding(BaseCommand command)
+        {
+            keyBindings[command.keyCode] = command;
+        }
+        
+        public void AddKeyBinding(KeyCode keyCode, BaseCommand command)
+        {
+            keyBindings[keyCode] = command;
+            command.keyCode = keyCode;
         }
     }
 }

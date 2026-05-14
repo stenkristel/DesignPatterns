@@ -11,10 +11,8 @@ GameObject:
   - component: {fileID: 4059432006342949265}
   - component: {fileID: 4961397793912039752}
   - component: {fileID: 5815788212350832550}
-  - component: {fileID: 4438856179862202951}
-  - component: {fileID: 3778777586498261030}
   - component: {fileID: 3444699532087112858}
-  - component: {fileID: 7360623386586775484}
+  - component: {fileID: 2402831549021108655}
   m_Layer: 0
   m_Name: Player
   m_TagString: Vertical
@@ -90,78 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4438856179862202951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7023466631409919439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10f9e7e4f9419c549b5aa100927058cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
---- !u!114 &3778777586498261030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7023466631409919439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9af1c8ff9dc74684b9c12f516eea818c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bindings:
-  - keyCode: 119
-    command: {fileID: 0}
-    onPressed:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4438856179862202951}
-          m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-          m_MethodName: MoveVertical
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 1
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    onDown:
-      m_PersistentCalls:
-        m_Calls: []
-    onUp:
-      m_PersistentCalls:
-        m_Calls: []
-  - keyCode: 115
-    command: {fileID: 0}
-    onPressed:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4438856179862202951}
-          m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-          m_MethodName: MoveVertical
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: -1
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    onDown:
-      m_PersistentCalls:
-        m_Calls: []
-    onUp:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!61 &3444699532087112858
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -208,7 +134,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.99999994, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7360623386586775484
+--- !u!114 &2402831549021108655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

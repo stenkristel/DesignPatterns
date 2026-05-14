@@ -1,27 +1,34 @@
 using Input;
+using Interfaces;
 using Player;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace BuilderPattern
 {
-    public class Character :  MonoBehaviour
+    public class Character : MonoBehaviour, IUpdatable
     {
-        public CharacterStats Stats;
-        public BaseClass Class;
-        public InputHandler Input;
-        public PlayerMovement Movement;
+        public CharacterStats Stats { get; set; }
+        public BaseClass Class { get; set; }
+        public InputHandler Input { get; set; }
+        public PlayerMovement Movement { get; set; }
         
         public void Setup()
         {
-            Input.keyBindings.Add(new MoveCommand(1), KeyCode.W);
-            Input.keyBindings.Add(new MoveCommand(-1), KeyCode.S);
+            Input.AddKeyBindings(Movement.UpMovement, Movement.DownMovement);
+        }
+
+        public void OnUpdate()
+        {
+            Input.OnUpdate();
         }
 
         public void Paste(Character character)
         {
             Stats = character.Stats;
             Class = character.Class;
+            Input = character.Input;
+            Movement = character.Movement;
         }
     }
 }
