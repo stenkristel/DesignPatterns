@@ -1,7 +1,7 @@
 namespace Player.Class
 {
-    public class BaseClass
+    public abstract class BaseClass
     {
-        
+        //
     }
 }

@@ -6,7 +6,7 @@ namespace Input
 {
     public class InputHandler
     {
-        public Dictionary<KeyCode, BaseCommand> keyBindings = new();
+        private Dictionary<KeyCode, BaseCommand> keyBindings = new();
 
         public void OnUpdate()
         {

@@ -9,7 +9,6 @@ namespace Player.Movement
         public MoveCommand DownMovement { get; private set; }
         public float Speed { get; set; }
         
-
         public PlayerMovement(MoveCommand upMovement, MoveCommand downMovement, Transform transform)
         {
             UpMovement = upMovement;
@@ -18,8 +17,14 @@ namespace Player.Movement
             UpMovement.onMove += MoveVertical;
             DownMovement.onMove += MoveVertical;
         }
+        
+        public void OnDestroy()
+        {
+            UpMovement.onMove -= MoveVertical;
+            DownMovement.onMove -= MoveVertical;
+        }
 
-        public void MoveVertical(float direction)
+        private void MoveVertical(float direction)
         {
             var positionChange = direction * Speed * Time.deltaTime;
             var pos = _transform.position;
@@ -27,10 +32,6 @@ namespace Player.Movement
             _transform.position = pos;
         }
 
-        public void OnDestroy()
-        {
-            UpMovement.onMove -= MoveVertical;
-            DownMovement.onMove -= MoveVertical;
-        }
+        
     }
 }

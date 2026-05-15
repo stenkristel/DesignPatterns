@@ -13,10 +13,20 @@ namespace UI
 
         private void Start()
         {
-            ScoreTracker.Instance.onScoreUpdate += UpdatePlayerScoreText;
+            AssignEvents();
         }
 
         private void OnDestroy()
+        {
+            UnAssignEvents();
+        }
+
+        private void AssignEvents()
+        {
+            ScoreTracker.Instance.onScoreUpdate += UpdatePlayerScoreText;
+        }
+
+        private void UnAssignEvents()
         {
             ScoreTracker.Instance.onScoreUpdate -= UpdatePlayerScoreText;
         }

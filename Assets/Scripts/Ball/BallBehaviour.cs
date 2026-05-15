@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Ball
 {
-    public class BallMovement : MonoBehaviour
+    public class BallBehaviour : MonoBehaviour
     {
         [SerializeField] private Vector2 speed;
         [SerializeField] private Rigidbody2D rb;
@@ -26,6 +26,6 @@ namespace Ball
             {
                 speed *= borderObject.OnHitDirectionModifier;
             }
-        }
+        } 
     }
 }
