@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BuilderPattern
+namespace Player
 {
     public class CharacterStats : MonoBehaviour
     {

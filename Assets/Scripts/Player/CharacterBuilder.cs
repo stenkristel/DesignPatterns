@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Input;
-using Player;
-using UnityEngine;
+using Player.Class;
+using Player.Movement;
 
-namespace BuilderPattern
+namespace Player
 {
     public class CharacterBuilder
     {

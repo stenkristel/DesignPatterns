@@ -1,4 +1,4 @@
-namespace BuilderPattern
+namespace Player.Class
 {
     public class BaseClass
     {

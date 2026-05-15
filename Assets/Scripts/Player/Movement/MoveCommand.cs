@@ -2,7 +2,7 @@ using System;
 using Input;
 using UnityEngine;
 
-namespace Player
+namespace Player.Movement
 {
     public class MoveCommand : BaseCommand
     {

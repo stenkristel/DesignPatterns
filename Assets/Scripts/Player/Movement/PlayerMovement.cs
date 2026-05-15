@@ -1,29 +1,27 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Player
+namespace Player.Movement
 {
     public class PlayerMovement : MonoBehaviour
     {
-        private float _speed;
-        private Transform _transform;
+        private readonly Transform _transform;
         public MoveCommand UpMovement { get; private set; }
         public MoveCommand DownMovement { get; private set; }
+        public float Speed { get; set; }
+        
 
-        public PlayerMovement(MoveCommand upMovement, MoveCommand downMovement, Transform transform, float speed)
+        public PlayerMovement(MoveCommand upMovement, MoveCommand downMovement, Transform transform)
         {
             UpMovement = upMovement;
             DownMovement = downMovement;
             _transform = transform;
-            _speed = speed;
             UpMovement.onMove += MoveVertical;
             DownMovement.onMove += MoveVertical;
         }
 
         public void MoveVertical(float direction)
         {
-            var positionChange = direction * _speed * Time.deltaTime;
+            var positionChange = direction * Speed * Time.deltaTime;
             var pos = _transform.position;
             pos += new Vector3(0, positionChange, 0);
             _transform.position = pos;

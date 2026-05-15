@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace Interfaces
+namespace Framework.Interfaces
 {
     public interface IUpdatable
     {

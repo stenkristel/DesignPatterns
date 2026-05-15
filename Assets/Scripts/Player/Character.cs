@@ -1,10 +1,10 @@
+using Framework.Interfaces;
 using Input;
-using Interfaces;
-using Player;
+using Player.Class;
+using Player.Movement;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace BuilderPattern
+namespace Player
 {
     public class Character : MonoBehaviour, IUpdatable
     {
@@ -16,6 +16,7 @@ namespace BuilderPattern
         public void Setup()
         {
             Input.AddKeyBindings(Movement.UpMovement, Movement.DownMovement);
+            Movement.Speed = Stats.Speed;
         }
 
         public void OnUpdate()
