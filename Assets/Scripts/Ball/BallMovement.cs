@@ -1,4 +1,5 @@
 using Border;
+using Score;
 using UnityEngine;
 
 namespace Ball
@@ -15,18 +16,16 @@ namespace Ball
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (!collision.gameObject.TryGetComponent<IBorderObject>(out IBorderObject borderObject))
+            if (collision.gameObject.TryGetComponent(out IGoalObject goalObject))
             {
-                return;
+                ScoreTracker.Instance.HandleScoreUpdate(goalObject.Player); //todo replace with notifying gameStateManager, and make score updater listen to that
+                //destroy self
             }
-
-            if (borderObject.IsGoal)
+            
+            if (collision.gameObject.TryGetComponent(out IBorderObject borderObject))
             {
-                //goal
-                return;
+                speed *= borderObject.OnHitDirectionModifier;
             }
-
-            speed *= borderObject.OnHitDirectionModifier;
         }
     }
 }

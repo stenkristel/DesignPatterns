@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace Framework
 {
-    public class Singleton : MonoBehaviour
+    public abstract class Singleton<T> : MonoBehaviour where T : Component
     {
-        public static Singleton Instance { get; private set; }
+        public static T Instance { get; private set; }
 
         private void Awake()
         {
@@ -18,7 +18,7 @@ namespace Framework
                 Destroy(this);
                 return;
             }
-            Instance = this;
+            Instance = GetComponent<T>();
         }
     }
 }

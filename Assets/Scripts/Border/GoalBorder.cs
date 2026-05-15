@@ -1,10 +1,18 @@
+using System;
+using Enums;
 using UnityEngine;
 
 namespace Border
 {
-    public class GoalBorder : MonoBehaviour, IBorderObject
+    public class GoalBorder : MonoBehaviour, IGoalObject
     {
-        public bool IsGoal => true;
-        public Vector2 OnHitDirectionModifier => Vector2.zero;
+        [SerializeField] private Players playersGoal;
+
+        private void Start()
+        {
+            Player = playersGoal;
+        }
+
+        public Players Player { get; set; }
     }
 }
