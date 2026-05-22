@@ -5,7 +5,7 @@ using Enums;
 
 namespace Score
 {
-    public class ScoreTracker : Singleton<ScoreTracker>
+    public class ScoreTracker : Singleton<ScoreTracker>, IObserver
     {
         private Dictionary<Players, int> _playerScores = new();
 
@@ -13,6 +13,7 @@ namespace Score
         
         public void HandleScoreUpdate(Players player, int scoreAdd = 1)
         {
+            print("HandleScoreUpdate");
             _playerScores.TryAdd(player, 0);
             _playerScores[player] += scoreAdd;
             onScoreUpdate?.Invoke(player, _playerScores[player]);

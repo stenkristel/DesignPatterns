@@ -1,5 +1,6 @@
 using System;
 using Enums;
+using Framework;
 using Score;
 using TMPro;
 using UnityEngine;
@@ -10,9 +11,11 @@ namespace UI
     {
         [SerializeField] private TMP_Text scorePlayerLText;
         [SerializeField] private TMP_Text scorePlayerRText;
+        private ScoreTracker _scoreTracker;
 
         private void Start()
         {
+            _scoreTracker =  ServiceLocator<ScoreTracker>.GetItem;
             AssignEvents();
         }
 
@@ -23,12 +26,12 @@ namespace UI
 
         private void AssignEvents()
         {
-            ScoreTracker.Instance.onScoreUpdate += UpdatePlayerScoreText;
+            _scoreTracker.onScoreUpdate += UpdatePlayerScoreText;
         }
 
         private void UnAssignEvents()
         {
-            ScoreTracker.Instance.onScoreUpdate -= UpdatePlayerScoreText;
+            _scoreTracker.onScoreUpdate -= UpdatePlayerScoreText;
         }
 
         private void UpdatePlayerScoreText(Players player, int newScore)
