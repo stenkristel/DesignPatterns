@@ -24,12 +24,12 @@ namespace Input
                     keyBinding.Value?.Execute();
                 }
 
-                if (UnityEngine.Input.GetKeyDown(keyBinding.Key))
+                else if (UnityEngine.Input.GetKeyDown(keyBinding.Key))
                 {
                     keyBinding.Value?.ExecuteDown();
                 }
 
-                if (UnityEngine.Input.GetKeyUp(keyBinding.Key))
+                else if (UnityEngine.Input.GetKeyUp(keyBinding.Key))
                 {
                     keyBinding.Value?.ExecuteUp();
                 }

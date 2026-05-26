@@ -1,17 +1,18 @@
 using Border;
+using Framework;
 using Framework.Interfaces;
 using Score;
 using UnityEngine;
 
 namespace Ball
 {
-    public class BallBehaviour : MonoBehaviour, IUpdatable
+    public class BallBehaviour : IUpdatable
     {
         private Vector2 _speed;
         private Rigidbody2D _rb;
-        private ScoreTracker _scoreTracker;
+        private IScoreTracker _scoreTracker;
         
-        public BallBehaviour(Vector2 speed, Rigidbody2D rb, ScoreTracker scoreTracker)
+        public BallBehaviour(Vector2 speed, Rigidbody2D rb, IScoreTracker scoreTracker)
         {
             _speed = speed;
             _rb = rb;
@@ -35,13 +36,6 @@ namespace Ball
             {
                 _speed *= borderObject.OnHitDirectionModifier;
             }
-        }
-
-        public void Paste(BallBehaviour ball)
-        {
-            _speed = ball._speed;
-            _rb = ball._rb;
-            _scoreTracker = ball._scoreTracker;
         }
     }
 }

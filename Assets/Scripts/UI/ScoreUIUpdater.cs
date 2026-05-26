@@ -15,7 +15,7 @@ namespace UI
 
         private void Start()
         {
-            _scoreTracker =  ServiceLocator<ScoreTracker>.GetItem;
+            _scoreTracker = ServiceLocator<ScoreTracker>.GetItem;
             AssignEvents();
         }
 

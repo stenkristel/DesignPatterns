@@ -18,9 +18,10 @@ namespace Framework
             }
         }
 
-        public static void Provide(T item)
+        public static T Provide(T item)
         {
             _instance = item;
+            return item;
         }
     }
 }

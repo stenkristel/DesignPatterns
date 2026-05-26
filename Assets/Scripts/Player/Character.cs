@@ -23,13 +23,5 @@ namespace Player
         {
             Input.OnUpdate();
         }
-
-        public void Paste(Character character)
-        {
-            Stats = character.Stats;
-            Class = character.Class;
-            Input = character.Input;
-            Movement = character.Movement;
-        }
     }
 }
