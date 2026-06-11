@@ -4,6 +4,6 @@ namespace Border
 {
     public interface IGoalObject
     {
-        public Players Player { get; set; }
+        public Players Player { get; }
     }
 }

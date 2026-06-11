@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Ball;
+using Border;
+using Enums;
 using Framework;
 using Framework.Interfaces;
 using Input;
@@ -11,26 +13,30 @@ using UnityEngine;
 using Player;
 using Player.Class;
 using Score;
+using BoxCollider = Collision.BoxCollider;
 using Object = System.Object;
 
 [SuppressMessage("ReSharper", "Unity.IncorrectMonoBehaviourInstantiation")]
 public class Main : MonoBehaviour
 {
-    //services
+    [Header("Services")]
     private IScoreTracker _scoreTracker;
     private IObjectTracker _objectTracker;
     
-    //players
+    [Header("Players")]
     [SerializeField] private Transform playerLSpawnLocation;
     [SerializeField] private Transform playerRSpawnLocation;
     [SerializeField] private GameObject playerPrefab;
     
-    //ball
+    [Header("ball")]
     [SerializeField] private GameObject ballPrefab;
     [SerializeField] private Transform ballSpawnLocation;
-    private BallBehaviour _ball;
+    private BallMovement _ball;
     
-    private List<IUpdatable> _updateAbles = new();
+    [Header("Borders & goals")]
+    [SerializeField] private GameObject[] horizontalBorders;
+    [SerializeField] private GameObject leftGoal;
+    [SerializeField] private GameObject rightGoal;
     
     private void Awake()
     {
@@ -41,14 +47,12 @@ public class Main : MonoBehaviour
     {
         SpawnPlayers();
         SpawnBall();
+        GiveComponents();
     }
 
     private void Update()
     {
-        foreach (var updateAble in _updateAbles)
-        {
-            updateAble.OnUpdate();
-        }
+        _objectTracker.OnUpdate();
     }
     
     private void CreateServices()
@@ -68,8 +72,7 @@ public class Main : MonoBehaviour
                 (new MoveCommand(1, KeyCode.W), new MoveCommand(-1, KeyCode.S), playerL.transform))
             .AddInputCommands(new InputHandler())
             .Build();
-        _objectTracker.Add(playerL, characterL);
-        _updateAbles.Add(characterL);
+        _objectTracker.Add(playerL, characterL, new VerticleBorder());
         
         var playerR = SpawnObject(playerPrefab, playerRSpawnLocation.position, Quaternion.identity);
         var characterR = new CharacterBuilder()
@@ -78,16 +81,26 @@ public class Main : MonoBehaviour
             .AddMovement(new PlayerMovement(new MoveCommand(1, KeyCode.UpArrow), new MoveCommand(-1, KeyCode.DownArrow) ,playerR.transform))
             .AddInputCommands(new InputHandler())
             .Build();
-        _objectTracker.Add(playerR, characterR);
-        _updateAbles.Add(characterR);
+        _objectTracker.Add(playerR, characterR, new VerticleBorder());
     }
     
     private void SpawnBall()
     {
         var ball = SpawnObject(ballPrefab, ballSpawnLocation.position, Quaternion.identity);
-        _ball = new BallBehaviour(new Vector2(3f, 4f), ball.GetComponent<Rigidbody2D>(), _scoreTracker);
-        _objectTracker.Add(ball, _ball);
-        _updateAbles.Add(_ball);
+        var boxCollider = new BoxCollider(ball);
+        _ball = new BallMovement(new Vector2(3f, 4f), ball.GetComponent<Rigidbody2D>(), _scoreTracker, boxCollider, _objectTracker);
+        _objectTracker.Add(ball, _ball, boxCollider);
+    }
+    
+    private void GiveComponents()
+    {
+        foreach (var border in horizontalBorders)
+        {
+            _objectTracker.Add(border, new HorizontalBorder());
+        }
+
+        _objectTracker.Add(leftGoal, new GoalBorder(Players.PlayerL));
+        _objectTracker.Add(rightGoal, new GoalBorder(Players.PlayerR));
     }
 
     private GameObject SpawnObject(GameObject prefab, Vector3 position,  Quaternion rotation, params object[] components)

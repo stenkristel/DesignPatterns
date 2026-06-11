@@ -4,15 +4,13 @@ using UnityEngine;
 
 namespace Border
 {
-    public class GoalBorder : MonoBehaviour, IGoalObject
+    public class GoalBorder : IGoalObject
     {
-        [SerializeField] private Players playersGoal;
+        public Players Player { get; }
 
-        private void Start()
+        public GoalBorder(Players playersGoal)
         {
             Player = playersGoal;
         }
-
-        public Players Player { get; set; }
     }
 }

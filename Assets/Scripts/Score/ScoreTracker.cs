@@ -14,7 +14,6 @@ namespace Score
         
         public void HandleScoreUpdate(Players player, int scoreAdd = 1)
         {
-            Debug.Log("HandleScoreUpdate");
             _playerScores.TryAdd(player, 0);
             _playerScores[player] += scoreAdd;
             onScoreUpdate?.Invoke(player, _playerScores[player]);
